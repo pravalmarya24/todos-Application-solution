@@ -93,3 +93,4 @@ app.get("/todos/:todoId/", async (request, response) => {
   let statusQuery = await db.all(getTodoQuery);
   response.send(statusQuery);
 });
+module.exports = app;
