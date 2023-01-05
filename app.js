@@ -49,7 +49,7 @@ app.get("/todos/", async (request, response) => {
                 SELECT *
                 FROM
                     todo
-                WHERE title LIKE '%${search_q}%',
+                WHERE todo LIKE '%${search_q}%',
                 AND status = '${status}',
                 AND priority = '${priority}';`;
       break;
@@ -59,7 +59,7 @@ app.get("/todos/", async (request, response) => {
                 SELECT *
                 FROM
                     todo
-                WHERE title LIKE '%${search_q}%',
+                WHERE todo LIKE '%${search_q}%',
                 AND priority = '${priority}';`;
       break;
     case hasStatus(request.query):
@@ -67,7 +67,7 @@ app.get("/todos/", async (request, response) => {
                 SELECT *
                 FROM
                     todo
-                WHERE title LIKE '%${search_q}%',
+                WHERE todo LIKE '%${search_q}%',
                 AND status = '${status}';`;
       break;
 
@@ -76,7 +76,7 @@ app.get("/todos/", async (request, response) => {
                 SELECT *
                 FROM
                     todo
-                WHERE title LIKE '%${search_q}%';`;
+                WHERE todo LIKE '%${search_q}%';`;
       data = await db.all(getTodoQuery);
       response.send(data);
   }
