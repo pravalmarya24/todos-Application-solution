@@ -35,7 +35,7 @@ let hasPriority = (requestQuery) => {
   return requestQuery.priority !== undefined;
 };
 let hasStatus = (requestQuery) => {
-  return requestQuery.Status !== undefined;
+  return requestQuery.status !== undefined;
 };
 
 app.get("/todos/", async (request, response) => {
@@ -49,8 +49,8 @@ app.get("/todos/", async (request, response) => {
                 SELECT *
                 FROM
                     todo
-                WHERE todo LIKE '%${search_q}%',
-                AND status = '${status}',
+                WHERE todo LIKE '%${search_q}%'
+                AND status = '${status}'
                 AND priority = '${priority}';`;
       break;
 
@@ -59,7 +59,7 @@ app.get("/todos/", async (request, response) => {
                 SELECT *
                 FROM
                     todo
-                WHERE todo LIKE '%${search_q}%',
+                WHERE todo LIKE '%${search_q}%'
                 AND priority = '${priority}';`;
       break;
     case hasStatus(request.query):
@@ -67,7 +67,7 @@ app.get("/todos/", async (request, response) => {
                 SELECT *
                 FROM
                     todo
-                WHERE todo LIKE '%${search_q}%',
+                WHERE todo LIKE '%${search_q}%'
                 AND status = '${status}';`;
       break;
 
@@ -77,9 +77,9 @@ app.get("/todos/", async (request, response) => {
                 FROM
                     todo
                 WHERE todo LIKE '%${search_q}%';`;
-      data = await db.all(getTodoQuery);
-      response.send(data);
   }
+  data = await db.all(getTodoQuery);
+  response.send(data);
 });
 
 app.get("/todos/:todoId/", async (request, response) => {
@@ -90,7 +90,7 @@ app.get("/todos/:todoId/", async (request, response) => {
             todo
         WHERE
             id = '${todoId}';`;
-  let statusQuery = await db.all(getTodoQuery);
+  let statusQuery = await db.get(getTodoQuery);
   response.send(statusQuery);
 });
 
